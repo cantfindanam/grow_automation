@@ -1,6 +1,6 @@
 substitutions:
   name: esphome-web-d0a224
-  friendly_name: Temp-Ds18
+  friendly_name: Temp-Ds1800
 
 esphome:
   name: ${name}
