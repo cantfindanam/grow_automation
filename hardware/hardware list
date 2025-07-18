@@ -1,1 +1,27 @@
+## 📋 Übersicht ESP32-basierter Boards für GrowBot-Projekte
+
+| Board                      | Größe (mm)     | GPIO Pins | I2C (SDA/SCL) | UART | PWM | Besonderheiten |
+|----------------------------|----------------|-----------|---------------|------|-----|----------------|
+| **ESP32 DevKit V1 (DOIT)** | ca. 53 × 28    | 30        | GPIO21/22     | 3     | 16+ | Klassiker, Breadboard-kompatibel |
+| **ESP32-WROOM-32U**        | ca. 50 × 25    | 30        | beliebig*     | 3     | 16+ | externer Antennenanschluss |
+| **ESP32-WROVER**           | ca. 50 × 25    | 30        | beliebig*     | 3     | 16+ | zusätzlich PSRAM (4–8 MB) |
+| **NodeMCU-32S**            | ca. 58 × 31    | 30        | GPIO21/22     | 3     | 16+ | Micro-USB, stabil, ideal für Prototyping |
+| **TTGO T-Display**         | ca. 51 × 25    | 14        | GPIO21/22     | 2     | 8+  | 1.14" LCD integriert, kompakt |
+| **TTGO T-Beam**            | ca. 60 × 30    | 22        | GPIO21/22     | 2     | 8+  | GPS + LoRa integriert |
+| **LilyGO T-QT v1.1**       | ca. 27 × 20    | 14        | GPIO21/22     | 2     | 6+  | sehr klein, USB-C, für kompakte Builds |
+| **ESP32-CAM**              | ca. 40 × 27    | 9         | GPIO14/15**   | 1     | 4+  | Kamera-Modul, kein USB, UART-Flash erforderlich |
+| **M5Stack Core2**          | ca. 54 × 54 × 16 | 24+       | GPIO21/22     | 1     | 10+ | Touchscreen, Batterie, erweiterbar |
+| **M5StickC Plus**          | ca. 48 × 24 × 14 | 14        | GPIO32/33     | 1     | 6+  | Display + Akku, sehr portabel |
+
+\* I2C ist softwareseitig frei konfigurierbar, oft GPIO21 (SDA) und GPIO22 (SCL) verwendet  
+\** ESP32-CAM hat keine dedizierten I2C-Pins; ggf. mit Einschränkungen nutzbar
+
+---
+
+### 🛠️ Hinweis
+Die PWM-Fähigkeit hängt von der Anzahl freier GPIOs und interner Ressourcen ab. Bei manchen Boards sind durch integrierte Module (z. B. LCD, Kamera, GPS) einige Pins bereits belegt. Für GrowBot-Einsatz solltest du auf ausreichend freie I/O achten – besonders für:
+- Sensorik (I2C, UART)
+- Aktoren (PWM, Relais)
+- Erweiterung (z. B. I²C-Multiplexer, ADC)
+
 
