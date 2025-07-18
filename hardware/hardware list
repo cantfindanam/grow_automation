@@ -25,3 +25,53 @@ Die PWM-Fähigkeit hängt von der Anzahl freier GPIOs und interner Ressourcen ab
 - Erweiterung (z. B. I²C-Multiplexer, ADC)
 
 
+## 🌡️ Übersicht kompatibler Temperatursensoren für ESP32
+
+| Sensor            | Schnittstelle | Messbereich       | Genauigkeit     | Besonderheiten                                |
+|-------------------|----------------|-------------------|------------------|-----------------------------------------------|
+| **DS18B20**        | 1-Wire         | –55 °C bis +125 °C | ±0.5 °C          | Digital, wasserdicht erhältlich, lange Kabel möglich |
+| **DHT22 (AM2302)** | digital (1-wire-ähnlich) | –40 °C bis +80 °C | ±0.5 °C          | kombiniert mit Luftfeuchte, günstig, langsam (~2s) |
+| **DHT11**          | digital        | 0 °C bis +50 °C    | ±2 °C            | sehr günstig, geringe Genauigkeit, nur für Innenraum |
+| **BME280**         | I²C / SPI      | –40 °C bis +85 °C  | ±1.0 °C          | kombiniert mit Feuchte & Luftdruck, kompakt   |
+| **BMP280**         | I²C / SPI      | –40 °C bis +85 °C  | ±1.0 °C          | wie BME280, aber ohne Luftfeuchtigkeit        |
+| **SHT31/SHT35**    | I²C            | –40 °C bis +125 °C | ±0.2–0.3 °C      | sehr präzise, oft in Industrieumgebungen genutzt |
+| **LM75A**          | I²C            | –55 °C bis +125 °C | ±2.0 °C          | einfache I²C-Lösung, preiswert                |
+| **TMP36**          | analog         | –40 °C bis +125 °C | ±1.0 °C          | benötigt ADC, analog auslesbar, einfach       |
+| **MAX31865 + PT100/PT1000** | SPI     | –200 °C bis +850 °C | ±0.15 °C (mit PT1000) | für sehr genaue Messungen mit Widerstandsthermometern |
+| **SHTC3**          | I²C            | –40 °C bis +125 °C | ±0.2 °C          | sehr kompakt, niedriger Stromverbrauch        |
+
+---
+
+### 🛠️ Hinweise zur Integration mit ESP32
+- **I²C-fähige Sensoren** (BME280, SHT31, LM75A etc.) können parallel betrieben werden, ideal für mehrere Sensoren
+- **DS18B20** eignet sich gut für Außen- oder Flüssigkeitsmessung (wasserdicht, lange Kabel)
+- **DHT22** ist weit verbreitet, aber vergleichsweise träge
+- **Analoge Sensoren** benötigen einen freien **ADC-Pin** (nicht bei allen ESP32-Pins voll nutzbar)
+- Für **hohe Genauigkeit** oder industrielle Anwendungen ist **MAX31865 + PT1000** eine sehr gute Lösung
+
+## 🧪 Übersicht EC- und pH-Sensoren kompatibel mit ESP32
+
+| Sensor / Modul               | Typ         | Schnittstelle | Messbereich          | Genauigkeit      | Medium                | Besonderheiten                                              |
+|------------------------------|-------------|----------------|----------------------|------------------|------------------------|-------------------------------------------------------------|
+| **DFRobot Gravity pH Sensor V2** | pH          | analog         | pH 0–14              | ±0.1–0.2         | Wasser (Hydro), Substrat (mit Pflege) | Standardlösung, einfache Kalibrierung, viele Anleitungen   |
+| **DFRobot Gravity EC Sensor V2** | EC          | analog         | 0–20 mS/cm           | ±5 %             | Wasser (Hydro), bedingt Substrat     | Temperaturkompensation empfohlen, guter Einstieg            |
+| **Atlas Scientific pH Kit**      | pH          | UART / I²C     | pH 0–14              | ±0.002–0.01      | Wasser, bedingt Substrat             | Sehr hohe Genauigkeit, industrietauglich, modular           |
+| **Atlas Scientific EC Kit**      | EC          | UART / I²C     | 0.07–500 mS/cm       | ±2 %             | Wasser (Hydro)                       | Hochwertige Laborsensorik, Kalibrierung über Kommandozeile |
+| **Gravity Analog TDS Sensor**   | TDS/EC       | analog         | 0–1000 ppm (TDS)     | ±10 %            | Wasser                             | Für Trinkwasser geeignet, günstiger EC-Ersatz               |
+| **EZO EC / pH Circuit (Atlas)** | EC / pH      | I²C / UART     | abhängig von Elektrode | sehr hoch        | Wasser, bedingt Substrat             | Getrennte Circuit-/Elektrodenteile, sehr flexibel            |
+| **SEN0161-V2 (pH Sensor)**      | pH          | analog         | 0–14 pH              | ±0.1–0.3         | Wasser, optional Substrat            | Günstiger Einstieg, benötigt Kalibrierung                   |
+| **SEN0244 (EC Sensor)**         | EC          | analog         | 0–20 mS/cm           | ±5 %             | Wasser                              | Preiswerter EC-Sensor von DFRobot                          |
+| **Adafruit STEMMA pH Sensor**   | pH          | I²C            | 0–14 pH              | ±0.05–0.1        | Wasser                              | Kompatibel mit Qwiic/STEMMA QT, kompakte Lösung             |
+
+---
+
+### 💧 Hinweise zur Auswahl und Verwendung:
+
+- **EC-Sensoren** messen die **Leitfähigkeit der Nährlösung** – wichtig für die Düngerkonzentration.
+- **pH-Sensoren** reagieren empfindlich auf **Temperatur** und müssen regelmäßig **kalibriert** werden (z. B. mit pH 4/7/10-Lösungen).
+- Für Messung **im Substrat** sollten Sonden besonders robust sein und regelmäßig gereinigt werden.
+- Viele Sensoren haben eine **BNC-Buchse**, über die sich verschiedene Elektroden anschließen lassen.
+- **Atlas Scientific** ist teuer, aber extrem zuverlässig und modular – auch für professionelle Systeme geeignet.
+- **DFRobot** bietet ein gutes Preis-Leistungs-Verhältnis für DIY-Projekte mit dem ESP32.
+
+
