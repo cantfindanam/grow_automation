@@ -1,6 +1,6 @@
 substitutions:
   name: esphome-web-455c7c
-  friendly_name: Dimmer-Main
+  friendly_name: Main-Dimmer
 
 esphome:
   name: ${name}
