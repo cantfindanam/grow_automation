@@ -1,4 +1,4 @@
-🌱 grow_automation
+🌱 grow_automation  
 Welcome to GrowBot — your modular solution for automating indoor greenhouse environments!
 This repository contains helpful resources and documentation to help you build a smart grow room system from the ground up.
 
