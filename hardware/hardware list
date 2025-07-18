@@ -1,77 +1,76 @@
-## 📋 Übersicht ESP32-basierter Boards für GrowBot-Projekte
+## 📋 Overview of ESP32-Based Boards for GrowBot Projects
 
-| Board                      | Größe (mm)     | GPIO Pins | I2C (SDA/SCL) | UART | PWM | Besonderheiten |
-|----------------------------|----------------|-----------|---------------|------|-----|----------------|
-| **ESP32 DevKit V1 (DOIT)** | ca. 53 × 28    | 30        | GPIO21/22     | 3     | 16+ | Klassiker, Breadboard-kompatibel |
-| **ESP32-WROOM-32U**        | ca. 50 × 25    | 30        | beliebig*     | 3     | 16+ | externer Antennenanschluss |
-| **ESP32-WROVER**           | ca. 50 × 25    | 30        | beliebig*     | 3     | 16+ | zusätzlich PSRAM (4–8 MB) |
-| **NodeMCU-32S**            | ca. 58 × 31    | 30        | GPIO21/22     | 3     | 16+ | Micro-USB, stabil, ideal für Prototyping |
-| **TTGO T-Display**         | ca. 51 × 25    | 14        | GPIO21/22     | 2     | 8+  | 1.14" LCD integriert, kompakt |
-| **TTGO T-Beam**            | ca. 60 × 30    | 22        | GPIO21/22     | 2     | 8+  | GPS + LoRa integriert |
-| **LilyGO T-QT v1.1**       | ca. 27 × 20    | 14        | GPIO21/22     | 2     | 6+  | sehr klein, USB-C, für kompakte Builds |
-| **ESP32-CAM**              | ca. 40 × 27    | 9         | GPIO14/15**   | 1     | 4+  | Kamera-Modul, kein USB, UART-Flash erforderlich |
-| **M5Stack Core2**          | ca. 54 × 54 × 16 | 24+       | GPIO21/22     | 1     | 10+ | Touchscreen, Batterie, erweiterbar |
-| **M5StickC Plus**          | ca. 48 × 24 × 14 | 14        | GPIO32/33     | 1     | 6+  | Display + Akku, sehr portabel |
+| Board                      | Size (mm)     | GPIO Pins | I2C (SDA/SCL) | UART | PWM | Features                           |
+|----------------------------|----------------|-----------|---------------|------|-----|------------------------------------|
+| **ESP32 DevKit V1 (DOIT)** | approx. 53 × 28| 30        | GPIO21/22     | 3    | 16+ | Classic, breadboard-friendly       |
+| **ESP32-WROOM-32U**        | approx. 50 × 25| 30        | configurable* | 3    | 16+ | External antenna connector         |
+| **ESP32-WROVER**           | approx. 50 × 25| 30        | configurable* | 3    | 16+ | Includes PSRAM (4–8 MB)            |
+| **NodeMCU-32S**            | approx. 58 × 31| 30        | GPIO21/22     | 3    | 16+ | Micro-USB, stable, great for prototyping |
+| **TTGO T-Display**         | approx. 51 × 25| 14        | GPIO21/22     | 2    | 8+  | Built-in 1.14" LCD, compact        |
+| **TTGO T-Beam**            | approx. 60 × 30| 22        | GPIO21/22     | 2    | 8+  | Integrated GPS + LoRa             |
+| **LilyGO T-QT v1.1**       | approx. 27 × 20| 14        | GPIO21/22     | 2    | 6+  | Very small, USB-C, great for compact builds |
+| **ESP32-CAM**              | approx. 40 × 27| 9         | GPIO14/15**   | 1    | 4+  | Camera module, no USB, UART flashing required |
+| **M5Stack Core2**          | 54 × 54 × 16   | 24+       | GPIO21/22     | 1    | 10+ | Touchscreen, battery, expandable  |
+| **M5StickC Plus**          | 48 × 24 × 14   | 14        | GPIO32/33     | 1    | 6+  | Display + battery, ultra portable |
 
-\* I2C ist softwareseitig frei konfigurierbar, oft GPIO21 (SDA) und GPIO22 (SCL) verwendet  
-\** ESP32-CAM hat keine dedizierten I2C-Pins; ggf. mit Einschränkungen nutzbar
-
----
-
-### 🛠️ Hinweis
-Die PWM-Fähigkeit hängt von der Anzahl freier GPIOs und interner Ressourcen ab. Bei manchen Boards sind durch integrierte Module (z. B. LCD, Kamera, GPS) einige Pins bereits belegt. Für GrowBot-Einsatz solltest du auf ausreichend freie I/O achten – besonders für:
-- Sensorik (I2C, UART)
-- Aktoren (PWM, Relais)
-- Erweiterung (z. B. I²C-Multiplexer, ADC)
-
-
-## 🌡️ Übersicht kompatibler Temperatursensoren für ESP32
-
-| Sensor            | Schnittstelle | Messbereich       | Genauigkeit     | Besonderheiten                                |
-|-------------------|----------------|-------------------|------------------|-----------------------------------------------|
-| **DS18B20**        | 1-Wire         | –55 °C bis +125 °C | ±0.5 °C          | Digital, wasserdicht erhältlich, lange Kabel möglich |
-| **DHT22 (AM2302)** | digital (1-wire-ähnlich) | –40 °C bis +80 °C | ±0.5 °C          | kombiniert mit Luftfeuchte, günstig, langsam (~2s) |
-| **DHT11**          | digital        | 0 °C bis +50 °C    | ±2 °C            | sehr günstig, geringe Genauigkeit, nur für Innenraum |
-| **BME280**         | I²C / SPI      | –40 °C bis +85 °C  | ±1.0 °C          | kombiniert mit Feuchte & Luftdruck, kompakt   |
-| **BMP280**         | I²C / SPI      | –40 °C bis +85 °C  | ±1.0 °C          | wie BME280, aber ohne Luftfeuchtigkeit        |
-| **SHT31/SHT35**    | I²C            | –40 °C bis +125 °C | ±0.2–0.3 °C      | sehr präzise, oft in Industrieumgebungen genutzt |
-| **LM75A**          | I²C            | –55 °C bis +125 °C | ±2.0 °C          | einfache I²C-Lösung, preiswert                |
-| **TMP36**          | analog         | –40 °C bis +125 °C | ±1.0 °C          | benötigt ADC, analog auslesbar, einfach       |
-| **MAX31865 + PT100/PT1000** | SPI     | –200 °C bis +850 °C | ±0.15 °C (mit PT1000) | für sehr genaue Messungen mit Widerstandsthermometern |
-| **SHTC3**          | I²C            | –40 °C bis +125 °C | ±0.2 °C          | sehr kompakt, niedriger Stromverbrauch        |
+\* I2C is software-configurable, usually GPIO21 (SDA) and GPIO22 (SCL) are used  
+\** ESP32-CAM has no dedicated I2C pins; may be usable with limitations
 
 ---
 
-### 🛠️ Hinweise zur Integration mit ESP32
-- **I²C-fähige Sensoren** (BME280, SHT31, LM75A etc.) können parallel betrieben werden, ideal für mehrere Sensoren
-- **DS18B20** eignet sich gut für Außen- oder Flüssigkeitsmessung (wasserdicht, lange Kabel)
-- **DHT22** ist weit verbreitet, aber vergleichsweise träge
-- **Analoge Sensoren** benötigen einen freien **ADC-Pin** (nicht bei allen ESP32-Pins voll nutzbar)
-- Für **hohe Genauigkeit** oder industrielle Anwendungen ist **MAX31865 + PT1000** eine sehr gute Lösung
+### 🛠️ Note
+PWM capability depends on available GPIOs and internal resources. Some boards may have certain pins occupied due to integrated modules (e.g., LCD, camera, GPS).  
+For GrowBot use, ensure enough free I/Os — especially for:
+- Sensors (I2C, UART)
+- Actuators (PWM, relays)
+- Expansion (e.g., I²C multiplexer, ADC)
 
-## 🧪 Übersicht EC- und pH-Sensoren kompatibel mit ESP32
+## 🌡️ Overview of Compatible Temperature Sensors for ESP32
 
-| Sensor / Modul               | Typ         | Schnittstelle | Messbereich          | Genauigkeit      | Medium                | Besonderheiten                                              |
-|------------------------------|-------------|----------------|----------------------|------------------|------------------------|-------------------------------------------------------------|
-| **DFRobot Gravity pH Sensor V2** | pH          | analog         | pH 0–14              | ±0.1–0.2         | Wasser (Hydro), Substrat (mit Pflege) | Standardlösung, einfache Kalibrierung, viele Anleitungen   |
-| **DFRobot Gravity EC Sensor V2** | EC          | analog         | 0–20 mS/cm           | ±5 %             | Wasser (Hydro), bedingt Substrat     | Temperaturkompensation empfohlen, guter Einstieg            |
-| **Atlas Scientific pH Kit**      | pH          | UART / I²C     | pH 0–14              | ±0.002–0.01      | Wasser, bedingt Substrat             | Sehr hohe Genauigkeit, industrietauglich, modular           |
-| **Atlas Scientific EC Kit**      | EC          | UART / I²C     | 0.07–500 mS/cm       | ±2 %             | Wasser (Hydro)                       | Hochwertige Laborsensorik, Kalibrierung über Kommandozeile |
-| **Gravity Analog TDS Sensor**   | TDS/EC       | analog         | 0–1000 ppm (TDS)     | ±10 %            | Wasser                             | Für Trinkwasser geeignet, günstiger EC-Ersatz               |
-| **EZO EC / pH Circuit (Atlas)** | EC / pH      | I²C / UART     | abhängig von Elektrode | sehr hoch        | Wasser, bedingt Substrat             | Getrennte Circuit-/Elektrodenteile, sehr flexibel            |
-| **SEN0161-V2 (pH Sensor)**      | pH          | analog         | 0–14 pH              | ±0.1–0.3         | Wasser, optional Substrat            | Günstiger Einstieg, benötigt Kalibrierung                   |
-| **SEN0244 (EC Sensor)**         | EC          | analog         | 0–20 mS/cm           | ±5 %             | Wasser                              | Preiswerter EC-Sensor von DFRobot                          |
-| **Adafruit STEMMA pH Sensor**   | pH          | I²C            | 0–14 pH              | ±0.05–0.1        | Wasser                              | Kompatibel mit Qwiic/STEMMA QT, kompakte Lösung             |
+| Sensor            | Interface     | Measurement Range     | Accuracy        | Features                                        |
+|-------------------|----------------|------------------------|------------------|-------------------------------------------------|
+| **DS18B20**        | 1-Wire         | –55 °C to +125 °C      | ±0.5 °C          | Digital, waterproof available, long cables      |
+| **DHT22 (AM2302)** | digital (1-wire-like) | –40 °C to +80 °C  | ±0.5 °C          | Includes humidity sensor, affordable, slow (~2s) |
+| **DHT11**          | digital        | 0 °C to +50 °C         | ±2 °C            | Very cheap, low accuracy, indoor use only       |
+| **BME280**         | I²C / SPI      | –40 °C to +85 °C       | ±1.0 °C          | Also measures humidity & pressure, compact      |
+| **BMP280**         | I²C / SPI      | –40 °C to +85 °C       | ±1.0 °C          | Like BME280, but without humidity               |
+| **SHT31/SHT35**    | I²C            | –40 °C to +125 °C      | ±0.2–0.3 °C      | Very accurate, used in industrial environments   |
+| **LM75A**          | I²C            | –55 °C to +125 °C      | ±2.0 °C          | Simple I²C solution, low-cost                   |
+| **TMP36**          | analog         | –40 °C to +125 °C      | ±1.0 °C          | Needs ADC, analog output, easy to use           |
+| **MAX31865 + PT100/PT1000** | SPI | –200 °C to +850 °C     | ±0.15 °C (with PT1000) | For high-precision RTD measurements     |
+| **SHTC3**          | I²C            | –40 °C to +125 °C      | ±0.2 °C          | Very compact, low power consumption             |
 
 ---
 
-### 💧 Hinweise zur Auswahl und Verwendung:
+### 🛠️ Notes for ESP32 Integration
+- **I²C sensors** (BME280, SHT31, LM75A, etc.) can be used in parallel — ideal for multiple measurements
+- **DS18B20** is great for outdoor or liquid monitoring (waterproof, long cable support)
+- **DHT22** is widely used, but slower than others
+- **Analog sensors** need an **ADC-capable GPIO pin** (not all ESP32 pins support ADC well)
+- For **high-accuracy or industrial use**, **MAX31865 + PT1000** is an excellent solution
 
-- **EC-Sensoren** messen die **Leitfähigkeit der Nährlösung** – wichtig für die Düngerkonzentration.
-- **pH-Sensoren** reagieren empfindlich auf **Temperatur** und müssen regelmäßig **kalibriert** werden (z. B. mit pH 4/7/10-Lösungen).
-- Für Messung **im Substrat** sollten Sonden besonders robust sein und regelmäßig gereinigt werden.
-- Viele Sensoren haben eine **BNC-Buchse**, über die sich verschiedene Elektroden anschließen lassen.
-- **Atlas Scientific** ist teuer, aber extrem zuverlässig und modular – auch für professionelle Systeme geeignet.
-- **DFRobot** bietet ein gutes Preis-Leistungs-Verhältnis für DIY-Projekte mit dem ESP32.
+## 🧪 Overview of EC and pH Sensors Compatible with ESP32
 
+| Sensor / Module               | Type        | Interface     | Measurement Range     | Accuracy         | Medium                         | Features                                                  |
+|-------------------------------|-------------|----------------|------------------------|------------------|----------------------------------|-----------------------------------------------------------|
+| **DFRobot Gravity pH Sensor V2** | pH        | analog         | pH 0–14                | ±0.1–0.2         | Water (hydro), substrate (with care) | Standard option, easy calibration, well-documented        |
+| **DFRobot Gravity EC Sensor V2** | EC        | analog         | 0–20 mS/cm             | ±5 %             | Water (hydro), limited substrate | Needs temp compensation, good for beginners               |
+| **Atlas Scientific pH Kit**      | pH        | UART / I²C     | pH 0–14                | ±0.002–0.01      | Water, limited substrate         | Very high accuracy, modular, industrial-grade             |
+| **Atlas Scientific EC Kit**      | EC        | UART / I²C     | 0.07–500 mS/cm         | ±2 %             | Water (hydro)                   | Lab-quality EC sensor, CLI-based calibration              |
+| **Gravity Analog TDS Sensor**   | TDS/EC     | analog         | 0–1000 ppm (TDS)       | ±10 %            | Water                           | Suitable for drinking water, budget EC alternative        |
+| **EZO EC / pH Circuit (Atlas)** | EC / pH    | I²C / UART     | depends on electrode   | very high        | Water, limited substrate         | Modular circuit + probe system, very flexible             |
+| **SEN0161-V2 (pH Sensor)**      | pH        | analog         | pH 0–14                | ±0.1–0.3         | Water, optional substrate        | Low-cost pH sensor, requires regular calibration          |
+| **SEN0244 (EC Sensor)**         | EC        | analog         | 0–20 mS/cm             | ±5 %             | Water                           | Budget-friendly EC sensor from DFRobot                    |
+| **Adafruit STEMMA pH Sensor**   | pH        | I²C            | pH 0–14                | ±0.05–0.1        | Water                           | Qwiic/STEMMA QT compatible, compact & easy to use         |
+
+---
+
+### 💧 Notes on Selection and Use:
+
+- **EC sensors** measure the **electrical conductivity** of the nutrient solution — crucial for dosing accuracy.
+- **pH sensors** are **temperature-sensitive** and need **regular calibration** (e.g., pH 4/7/10 buffer solutions).
+- For use **in substrate**, probes must be durable and should be cleaned regularly.
+- Many sensors use a **BNC connector**, allowing flexible electrode swapping.
+- **Atlas Scientific** products are expensive but highly accurate and modular — suitable for professional setups.
+- **DFRobot** offers a good balance of price and performance for DIY projects with ESP32.
 
